@@ -1,0 +1,46 @@
+{
+  "ethPriceUSD": 2058.06,
+  "inrPerUSD": 83.5,
+  "sepoliaTestnet": {
+    "note": "Sepolia testnet — costs are indicative (using real gas data, live ETH price)",
+    "createGas": 172421,
+    "confirmGas": 194021,
+    "redeemGas": 32798,
+    "lifecycleGas": 399240,
+    "gasPriceGwei": 0.0591,
+    "lifecycleETH": 0.0000236,
+    "lifecycleUSD": 0.04856,
+    "lifecycleINR": 4.0548
+  },
+  "besuPrivateNetwork": {
+    "note": "Private Besu consortium — min-gas-price=0, no token cost to participants",
+    "lifecycleGas": 399240,
+    "gasPriceGwei": 0,
+    "lifecycleETH": 0,
+    "lifecycleUSD": 0,
+    "lifecycleINR": 0,
+    "infrastructureCostNote": "Infrastructure/cloud costs apply (out of scope)"
+  },
+  "restAPIBaseline": {
+    "note": "In-memory REST API — no blockchain, no transaction fees",
+    "lifecycleUSD": 0,
+    "lifecycleINR": 0
+  },
+  "traditionalPayments": {
+    "NEFT": {
+      "costINR": 2.5,
+      "costUSD": 0.02994,
+      "note": "Flat ₹2.5 per transfer (NPCI schedule of charges)"
+    },
+    "RTGS": {
+      "costINR": 25,
+      "costUSD": 0.2994,
+      "note": "₹25 per transfer for amounts ≥ ₹2 lakh"
+    },
+    "UPI": {
+      "costINR": 0,
+      "costUSD": 0,
+      "note": "Free for users; merchant MDR applicable"
+    }
+  }
+}

@@ -1,0 +1,227 @@
+{
+  "generatedAt": "2026-10-13T17:39:44.078Z",
+  "environment": {
+    "network": "hardhat",
+    "hardfork": "osaka",
+    "solc": "0.8.19",
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    }
+  },
+  "lifecyclesPerContract": 100,
+  "contracts": {
+    "SettlementSystemV0": {
+      "deployGas": 1045362,
+      "perCall": {
+        "createTransaction": {
+          "n": 100,
+          "mean": 172432.68,
+          "median": 172428,
+          "q1": 172428,
+          "q3": 172440,
+          "iqr": 12,
+          "stddev": 12.2253,
+          "min": 172416,
+          "max": 172452,
+          "p95": 172452,
+          "p99": 172452
+        },
+        "confirmDelivery": {
+          "n": 100,
+          "mean": 194014,
+          "median": 194014,
+          "q1": 194014,
+          "q3": 194014,
+          "iqr": 0,
+          "stddev": 0,
+          "min": 194014,
+          "max": 194014,
+          "p95": 194014,
+          "p99": 194014
+        },
+        "redeemToken": {
+          "n": 50,
+          "mean": 32786,
+          "median": 32786,
+          "q1": 32786,
+          "q3": 32786,
+          "iqr": 0,
+          "stddev": 0,
+          "min": 32786,
+          "max": 32786,
+          "p95": 32786,
+          "p99": 32786
+        },
+        "reclaimToken": {
+          "n": 50,
+          "mean": 30067,
+          "median": 30067,
+          "q1": 30067,
+          "q3": 30067,
+          "iqr": 0,
+          "stddev": 0,
+          "min": 30067,
+          "max": 30067,
+          "p95": 30067,
+          "p99": 30067
+        }
+      },
+      "lifecycleRedeemMean": 399233,
+      "lifecycleReclaimMean": 396514
+    },
+    "SettlementSystem": {
+      "deployGas": 1121885,
+      "perCall": {
+        "createTransaction": {
+          "n": 100,
+          "mean": 172478.68,
+          "median": 172474,
+          "q1": 172474,
+          "q3": 172486,
+          "iqr": 12,
+          "stddev": 12.2253,
+          "min": 172462,
+          "max": 172498,
+          "p95": 172498,
+          "p99": 172498
+        },
+        "confirmDelivery": {
+          "n": 100,
+          "mean": 194149,
+          "median": 194149,
+          "q1": 194149,
+          "q3": 194149,
+          "iqr": 0,
+          "stddev": 0,
+          "min": 194149,
+          "max": 194149,
+          "p95": 194149,
+          "p99": 194149
+        },
+        "redeemToken": {
+          "n": 50,
+          "mean": 32786,
+          "median": 32786,
+          "q1": 32786,
+          "q3": 32786,
+          "iqr": 0,
+          "stddev": 0,
+          "min": 32786,
+          "max": 32786,
+          "p95": 32786,
+          "p99": 32786
+        },
+        "reclaimToken": {
+          "n": 50,
+          "mean": 30067,
+          "median": 30067,
+          "q1": 30067,
+          "q3": 30067,
+          "iqr": 0,
+          "stddev": 0,
+          "min": 30067,
+          "max": 30067,
+          "p95": 30067,
+          "p99": 30067
+        }
+      },
+      "lifecycleRedeemMean": 399414,
+      "lifecycleReclaimMean": 396695
+    },
+    "SettlementSystemOptimized": {
+      "deployGas": 1032250,
+      "perCall": {
+        "createTransaction": {
+          "n": 100,
+          "mean": 123544.68,
+          "median": 123540,
+          "q1": 123540,
+          "q3": 123552,
+          "iqr": 12,
+          "stddev": 12.2253,
+          "min": 123528,
+          "max": 123564,
+          "p95": 123564,
+          "p99": 123564
+        },
+        "confirmDelivery": {
+          "n": 100,
+          "mean": 65136,
+          "median": 65136,
+          "q1": 65136,
+          "q3": 65136,
+          "iqr": 0,
+          "stddev": 0,
+          "min": 65136,
+          "max": 65136,
+          "p95": 65136,
+          "p99": 65136
+        },
+        "redeemToken": {
+          "n": 50,
+          "mean": 32993,
+          "median": 32993,
+          "q1": 32993,
+          "q3": 32993,
+          "iqr": 0,
+          "stddev": 0,
+          "min": 32993,
+          "max": 32993,
+          "p95": 32993,
+          "p99": 32993
+        },
+        "reclaimToken": {
+          "n": 50,
+          "mean": 27997,
+          "median": 27997,
+          "q1": 27997,
+          "q3": 27997,
+          "iqr": 0,
+          "stddev": 0,
+          "min": 27997,
+          "max": 27997,
+          "p95": 27997,
+          "p99": 27997
+        }
+      },
+      "lifecycleRedeemMean": 221674,
+      "lifecycleReclaimMean": 216678
+    }
+  },
+  "validationAgainstSepolia": [
+    {
+      "function": "createTransaction",
+      "localMean": 172432.68,
+      "sepoliaMean": 172420.68,
+      "differencePct": 0.007
+    },
+    {
+      "function": "confirmDelivery",
+      "localMean": 194014,
+      "sepoliaMean": 194020.6,
+      "differencePct": -0.003
+    },
+    {
+      "function": "redeemToken",
+      "localMean": 32786,
+      "sepoliaMean": 32798,
+      "differencePct": -0.037
+    },
+    {
+      "function": "reclaimToken",
+      "localMean": 30067,
+      "sepoliaMean": 30079,
+      "differencePct": -0.04
+    }
+  ],
+  "optimizedVsCurrent": {
+    "createTransaction": -28.37,
+    "confirmDelivery": -66.45,
+    "redeemToken": 0.63,
+    "reclaimToken": -6.88,
+    "lifecycleRedeem": -44.5,
+    "lifecycleReclaim": -45.38,
+    "deploy": -7.99
+  }
+}
