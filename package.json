@@ -1,0 +1,27 @@
+{
+  "name": "settlement-system",
+  "version": "1.0.0",
+  "description": "SettlementSystem smart contract experiment",
+  "scripts": {
+    "compile": "hardhat compile",
+    "deploy": "hardhat run scripts/deploy.js --network sepolia",
+    "experiment": "hardhat run scripts/experiment.js --network sepolia",
+    "test": "hardhat test",
+    "exp1:sepolia": "hardhat run scripts/exp1_sepolia_latency.js --network sepolia",
+    "exp2:sepolia": "hardhat run scripts/exp2_failure_dispute.js --network sepolia",
+    "exp3:rest": "node scripts/exp3_rest_baseline.js",
+    "exp4:local": "hardhat run scripts/exp4_besu_inprocess.js",
+    "combine": "node scripts/combine_results.js",
+    "test:gas": "REPORT_GAS=1 hardhat test",
+    "exp5:local": "hardhat run scripts/exp5_local_concurrency.js",
+    "gas:compare": "hardhat run scripts/gas_comparison.js"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "hardhat": "^2.22.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.0",
+    "express": "^4.22.1"
+  }
+}

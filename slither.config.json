@@ -1,0 +1,4 @@
+{
+  "filter_paths": "contracts/test|contracts/reference|node_modules",
+  "hardhat_ignore_compile": false
+}
