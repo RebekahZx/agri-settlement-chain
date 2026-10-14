@@ -25,6 +25,8 @@ const { guardOverwrite, CONTRACT, RESULTS_DIR, sleep, stats, printTable } = requ
 
 const BATCH_SIZES  = [100, 500, 1000];
 const SAMPLE_CAP   = { 100: 100, 500: 75, 1000: 50 };
+// EXP1_MAX caps every batch's sample (e.g. EXP1_MAX=10) to limit testnet spend.
+const EXP1_MAX     = process.env.EXP1_MAX ? Number(process.env.EXP1_MAX) : Infinity;
 const COOLDOWN_MS  = 300;
 const PRODUCE      = ["wheat", "rice", "maize", "soybean", "barley"];
 
@@ -60,7 +62,7 @@ async function main() {
   const allResults = {};
 
   for (const batchSize of BATCH_SIZES) {
-    const sampleSize = SAMPLE_CAP[batchSize];
+    const sampleSize = Math.min(SAMPLE_CAP[batchSize], EXP1_MAX);
     const isSampled  = sampleSize < batchSize;
     console.log(`\n${"=".repeat(62)}`);
     console.log(`Batch ${batchSize}  |  Sample: ${sampleSize}${isSampled ? ` of ${batchSize} (sample only, not extrapolated)` : " (full)"}`);

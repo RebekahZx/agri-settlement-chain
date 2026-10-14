@@ -21,7 +21,10 @@ const fs   = require("fs");
 const path = require("path");
 const { guardOverwrite, CONTRACT, RESULTS_DIR, sleep, stats, printTable } = require("./utils");
 
-const N_EACH     = 50;
+// Lifecycles per path. Default 50 (as in the stored results); EXP2_N overrides it,
+// e.g. EXP2_N=10 for a cheap gas-only comparison (gas is deterministic per call).
+const N_EACH     = Number(process.env.EXP2_N || 50);
+if (!Number.isInteger(N_EACH) || N_EACH < 1) throw new Error("EXP2_N must be a positive integer");
 const COOLDOWN   = 300;  // ms between on-chain calls
 const PRODUCE    = ["wheat", "rice", "maize", "soybean", "barley"];
 
