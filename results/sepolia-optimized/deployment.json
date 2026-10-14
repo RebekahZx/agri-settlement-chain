@@ -1,0 +1,9 @@
+{
+  "contract": "SettlementSystemOptimized",
+  "address": "0xf937809C96F61fb4939f07572Cc19cf11ca2928F",
+  "deployer": "0xDDd122CE803De568F400c3165A1747ADf5F7C075",
+  "network": "sepolia",
+  "txHash": "0x6ccb9bc767afef0d52b1c8edf3121a281ec6adf2c8eddee79ae1b1063c7fb823",
+  "gasUsed": "7221912",
+  "deployedAt": "2026-10-14T08:09:49.664Z"
+}
