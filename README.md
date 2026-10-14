@@ -1,5 +1,7 @@
 # Agri-Yield Chain — Blockchain Settlement for Farmer–Buyer Trades
 
+[![tests](https://github.com/RebekahZx/agri-settlement-chain/actions/workflows/test.yml/badge.svg)](https://github.com/RebekahZx/agri-settlement-chain/actions/workflows/test.yml)
+
 A Solidity smart contract (plus an escrow-based v2) that records an agricultural produce agreement between
 a registered buyer and farmer, an admin-confirmed delivery, and a settlement
 token (`ACTIVE → REDEEMED | RECLAIMED`). There are also experiment scripts that
@@ -134,6 +136,18 @@ ETH_PRICE_USD=2058.06 npm run combine   # pin the ETH price for reproducibility
 npm run gas:compare               # deterministic gas comparison (local)
 pip install matplotlib && python scripts/plot_results.py   # figures
 ```
+
+To measure the **optimised contract on Sepolia**, without touching the
+stored v1 results (outputs go to `results/sepolia-optimized/`):
+
+```bash
+npm run sepolia:opt:deploy
+npm run sepolia:opt:exp1          # ~225 create+confirm pairs; takes hours
+npm run sepolia:opt:exp2          # 50 redeem + 50 reclaim lifecycles
+```
+
+The scripts refuse to overwrite an existing result file unless `OVERWRITE=1`
+is set, and Exp 1/2 check that `deployment.json` matches `CONTRACT`.
 
 `BATCH_SIZES=10,20` overrides batch sizes for Exp 3 and Exp 4 (for quick
 smoke runs; the reported results use 100, 500 and 1000).
