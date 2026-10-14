@@ -1,9 +1,10 @@
 const { ethers } = require("hardhat");
 const fs = require("fs");
 const path = require("path");
-const { RESULTS_DIR } = require("./utils");
+const { CONTRACT, RESULTS_DIR, guardOverwrite } = require("./utils");
 
 async function main() {
+  guardOverwrite(path.join(RESULTS_DIR, "deployment.json"));
   const [deployer] = await ethers.getSigners();
   console.log("Deploying with account:", deployer.address);
 
@@ -14,8 +15,8 @@ async function main() {
     throw new Error("Account has no ETH. Get Sepolia ETH from https://sepoliafaucet.com/");
   }
 
-  console.log("\nDeploying SettlementSystem...");
-  const Factory = await ethers.getContractFactory("SettlementSystem");
+  console.log(`\nDeploying ${CONTRACT}...`);
+  const Factory = await ethers.getContractFactory(CONTRACT);
   const contract = await Factory.deploy();
   await contract.waitForDeployment();
 
@@ -28,17 +29,19 @@ async function main() {
 
   // Save deployment info
   const info = {
+    contract: CONTRACT,
     address,
     deployer: deployer.address,
-    network: "sepolia",
+    network: (await ethers.provider.getNetwork()).name,
     txHash: contract.deploymentTransaction().hash,
     gasUsed: receipt.gasUsed.toString(),
     deployedAt: new Date().toISOString()
   };
 
+  fs.mkdirSync(RESULTS_DIR, { recursive: true });
   const outPath = path.join(RESULTS_DIR, "deployment.json");
   fs.writeFileSync(outPath, JSON.stringify(info, null, 2));
-  console.log("\nDeployment info saved to deployment.json");
+  console.log(`\nDeployment info saved to ${outPath}`);
 }
 
 main().catch((err) => {

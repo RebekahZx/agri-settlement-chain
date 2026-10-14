@@ -19,7 +19,7 @@
 const { ethers } = require("hardhat");
 const fs   = require("fs");
 const path = require("path");
-const { RESULTS_DIR, sleep, stats, printTable } = require("./utils");
+const { guardOverwrite, CONTRACT, RESULTS_DIR, sleep, stats, printTable } = require("./utils");
 
 const N_EACH     = 50;
 const COOLDOWN   = 300;  // ms between on-chain calls
@@ -89,6 +89,7 @@ async function runLifecycle(contract, admin, i, path_type) {
 }
 
 async function main() {
+  guardOverwrite(path.join(RESULTS_DIR, "failure_dispute_results.json"));
   const dep = JSON.parse(fs.readFileSync(path.join(RESULTS_DIR, "deployment.json")));
   const [admin] = await ethers.getSigners();
   const bal = await ethers.provider.getBalance(admin.address);
@@ -97,7 +98,13 @@ async function main() {
 
   if (bal < ethers.parseEther("0.05")) throw new Error("Balance too low — top up from sepoliafaucet.com");
 
-  const contract = await ethers.getContractAt("SettlementSystem", dep.address, admin);
+  // The deployment records which contract it is; default to v1 for the stored March 2026 deployment.
+  const contractName = dep.contract || "SettlementSystem";
+  if (contractName !== CONTRACT && process.env.CONTRACT) {
+    throw new Error(`deployment.json is a ${contractName} deployment but CONTRACT=${CONTRACT}`);
+  }
+  console.log("Contract type:", contractName);
+  const contract = await ethers.getContractAt(contractName, dep.address, admin);
 
   // Ensure registrations
   try { await (await contract.registerFarmer(admin.address)).wait(); }

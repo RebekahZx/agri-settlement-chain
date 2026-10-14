@@ -69,4 +69,23 @@ function batchSizesFromEnv(defaults) {
   return sizes;
 }
 
-module.exports = { RESULTS_DIR, sleep, stats, percentile, round, printTable, batchSizesFromEnv };
+// Which contract the deploy/experiment scripts use. Default is the v1 contract
+// the stored results were measured with; set CONTRACT=SettlementSystemOptimized
+// (together with a separate RESULTS_DIR) to measure the optimised version.
+const CONTRACTS = ["SettlementSystem", "SettlementSystemOptimized", "SettlementSystemV0"];
+const CONTRACT = process.env.CONTRACT || "SettlementSystem";
+if (!CONTRACTS.includes(CONTRACT)) {
+  throw new Error(`CONTRACT must be one of ${CONTRACTS.join(", ")}, got "${CONTRACT}"`);
+}
+
+// Refuse to overwrite stored results unless OVERWRITE=1 is set.
+function guardOverwrite(filePath) {
+  const fs = require("fs");
+  if (fs.existsSync(filePath) && process.env.OVERWRITE !== "1") {
+    throw new Error(
+      `${filePath} already exists. Use a different RESULTS_DIR (recommended) or set OVERWRITE=1.`
+    );
+  }
+}
+
+module.exports = { guardOverwrite, CONTRACT, RESULTS_DIR, sleep, stats, percentile, round, printTable, batchSizesFromEnv };

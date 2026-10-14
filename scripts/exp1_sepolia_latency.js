@@ -21,7 +21,7 @@
 const { ethers } = require("hardhat");
 const fs   = require("fs");
 const path = require("path");
-const { RESULTS_DIR, sleep, stats, printTable } = require("./utils");
+const { guardOverwrite, CONTRACT, RESULTS_DIR, sleep, stats, printTable } = require("./utils");
 
 const BATCH_SIZES  = [100, 500, 1000];
 const SAMPLE_CAP   = { 100: 100, 500: 75, 1000: 50 };
@@ -29,6 +29,7 @@ const COOLDOWN_MS  = 300;
 const PRODUCE      = ["wheat", "rice", "maize", "soybean", "barley"];
 
 async function main() {
+  guardOverwrite(path.join(RESULTS_DIR, "full_latency_results.json"));
   const dep = JSON.parse(fs.readFileSync(path.join(RESULTS_DIR, "deployment.json")));
   const [admin] = await ethers.getSigners();
 
@@ -41,7 +42,13 @@ async function main() {
     throw new Error("Balance too low. Get Sepolia ETH from https://sepoliafaucet.com/");
   }
 
-  const contract = await ethers.getContractAt("SettlementSystem", dep.address, admin);
+  // The deployment records which contract it is; default to v1 for the stored March 2026 deployment.
+  const contractName = dep.contract || "SettlementSystem";
+  if (contractName !== CONTRACT && process.env.CONTRACT) {
+    throw new Error(`deployment.json is a ${contractName} deployment but CONTRACT=${CONTRACT}`);
+  }
+  console.log("Contract type:", contractName);
+  const contract = await ethers.getContractAt(contractName, dep.address, admin);
 
   // Ensure registrations (idempotent — contract allows re-registration without revert)
   console.log("Ensuring registrations...");
