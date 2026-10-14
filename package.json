@@ -17,7 +17,9 @@
     "gas:compare": "hardhat run scripts/gas_comparison.js",
     "sepolia:opt:deploy": "CONTRACT=SettlementSystemOptimized RESULTS_DIR=results/sepolia-optimized hardhat run scripts/deploy.js --network sepolia",
     "sepolia:opt:exp1": "CONTRACT=SettlementSystemOptimized RESULTS_DIR=results/sepolia-optimized hardhat run scripts/exp1_sepolia_latency.js --network sepolia",
-    "sepolia:opt:exp2": "CONTRACT=SettlementSystemOptimized RESULTS_DIR=results/sepolia-optimized hardhat run scripts/exp2_failure_dispute.js --network sepolia"
+    "sepolia:opt:exp2": "CONTRACT=SettlementSystemOptimized RESULTS_DIR=results/sepolia-optimized hardhat run scripts/exp2_failure_dispute.js --network sepolia",
+    "sepolia:v1:deploy": "CONTRACT=SettlementSystem RESULTS_DIR=results/sepolia-v1-glamsterdam hardhat run scripts/deploy.js --network sepolia",
+    "sepolia:v1:exp2": "CONTRACT=SettlementSystem RESULTS_DIR=results/sepolia-v1-glamsterdam hardhat run scripts/exp2_failure_dispute.js --network sepolia"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^4.0.0",
