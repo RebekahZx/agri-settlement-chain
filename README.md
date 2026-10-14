@@ -224,6 +224,22 @@ is one slot referencing its agreement instead of a 4-slot copy. See
 
 ![Settlement latency](docs/figures/settlement_latency.png)
 
+## Sepolia deployment of the optimised contract (October 2026)
+
+`SettlementSystemOptimized` is deployed on Ethereum Sepolia at
+[`0xf937809C96F61fb4939f07572Cc19cf11ca2928F`](https://sepolia.etherscan.io/address/0xf937809C96F61fb4939f07572Cc19cf11ca2928F)
+(deploy tx [`0x6ccb…b823`](https://sepolia.etherscan.io/tx/0x6ccb9bc767afef0d52b1c8edf3121a281ec6adf2c8eddee79ae1b1063c7fb823),
+2026-10-14; record in `results/sepolia-optimized/deployment.json`).
+
+Deployment used **7,221,912 gas**, versus 1,032,250 gas for the same bytecode
+on the local EVM. Sepolia activated the Glamsterdam upgrade on 2026-10-06,
+which adds a separate charge for newly created state (EIP-8037), including
+deployed code and new storage slots. All stored Sepolia results above were
+measured **before** that upgrade, so they are not directly comparable with
+measurements taken after it; a same-network re-run of v1 and the optimised
+contract (`npm run sepolia:v1:deploy`, `EXP2_N=10 npm run sepolia:v1:exp2`,
+`EXP2_N=10 npm run sepolia:opt:exp2`) is the planned comparison.
+
 ## Experiment 5 — concurrent submission (no stored results yet)
 
 Experiments 1–4 send one transaction and wait for it before sending the next,
